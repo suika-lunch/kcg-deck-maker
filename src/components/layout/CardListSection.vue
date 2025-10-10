@@ -209,22 +209,28 @@ const onListImageError = (e: Event) => {
               :pressed="isFavorite(card.id)"
               @toggle="toggleFavorite(card.id)"
             />
+
+            <template v-if="getCardInDeck(card.id) > 0">
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-slate-900/50 via-transparent to-transparent pointer-events-none"
+              ></div>
+
+              <div
+                class="absolute bottom-2 w-full px-1 flex items-center justify-center"
+                @click.stop
+              >
+                <CountStepper
+                  :count="getCardInDeck(card.id)"
+                  :is-increment-disabled="
+                    getCardInDeck(card.id) >= GAME_CONSTANTS.MAX_CARD_COPIES
+                  "
+                  @decrement="emit('decrementCard', card.id)"
+                  @increment="emit('incrementCard', card.id)"
+                />
+              </div>
+            </template>
           </template>
         </CardTile>
-
-        <div
-          v-if="getCardInDeck(card.id) > 0"
-          class="absolute bottom-2 w-full px-1 flex items-center justify-center gap-1"
-        >
-          <CountStepper
-            :count="getCardInDeck(card.id)"
-            :is-increment-disabled="
-              getCardInDeck(card.id) >= GAME_CONSTANTS.MAX_CARD_COPIES
-            "
-            @decrement="emit('decrementCard', card.id)"
-            @increment="emit('incrementCard', card.id)"
-          />
-        </div>
       </div>
     </div>
   </div>
