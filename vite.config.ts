@@ -16,20 +16,23 @@ export default defineConfig({
       manifest: {
         name: "非公式神椿TCGデッキメーカー",
         short_name: "KCG Maker",
+        lang: "ja",
+        start_url: "/",
+        scope: "/",
         display: "standalone",
         theme_color: "#000000",
         background_color: "#000000",
         description: "神椿TCGのデッキを構築・管理するための非公式ツールです。",
         icons: [
           {
-            src: "favicon.webp",
+            src: "favicon.png",
             sizes: "1024x1024",
-            type: "image/webp",
+            type: "image/png",
           },
         ],
       },
       workbox: {
-        globPatterns: ["**/*.{css,html,ico,js,png,svg,webmanifest,woff2}"],
+        globPatterns: ["**/*.{css,html,ico,js,png,svg,webmanifest,woff2,csv}"],
         runtimeCaching: [
           {
             urlPattern: ({ url }) =>
@@ -56,6 +59,7 @@ export default defineConfig({
                 "/sheet_three_rows.webp",
                 "/sheet_two_rows.webp",
                 "/sheet_no_grid.webp",
+                "/placeholder.webp",
               ].includes(url.pathname),
             handler: "CacheFirst",
             options: {
