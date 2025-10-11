@@ -20,6 +20,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "extends": ["@tsconfig/strictest"],
+  "extends": ["@tsconfig/bun", "@tsconfig/strictest"],
   "exclude": ["node_modules", "out", "dist"]
 }

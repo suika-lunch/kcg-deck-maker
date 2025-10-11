@@ -254,12 +254,16 @@ function parseCsv(csvText: string): Card[] {
     }
 
     const types = toCardTypeArray(parsed.output.type);
+    const hasEntryCondition =
+      parsed.output.effect !== undefined &&
+      parsed.output.effect.includes("【登場条件】");
     const base = {
       id: idResult.output,
       name: parsed.output.name,
       kind: kindResult.output,
       type: types,
       tags: parsed.output.tags as readonly string[],
+      hasEntryCondition,
     } satisfies Omit<Card, "effect">;
 
     const card: Card =

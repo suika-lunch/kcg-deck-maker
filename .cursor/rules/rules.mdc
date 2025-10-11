@@ -34,10 +34,10 @@ TypeScript で関数型ドメインモデリングを行う。class を使わず
 
 # Common Commands
 
-- `pnpm build` - Build the project
-- `pnpm lint` - Run linter
-- `pnpm typecheck` - Type check with vue-tsc
-- `pnpm format` - Format code with Prettier
+- `bun run build` - Build the project
+- `bun lint` - Run linter
+- `bun typecheck` - Type check with vue-tsc
+- `bun format` - Format code with Prettier
 
 # Semantic Commit Messages
 

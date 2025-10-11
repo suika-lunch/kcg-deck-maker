@@ -39,6 +39,6 @@ export interface Card {
   readonly kind: CardKind;
   readonly type: readonly CardType[];
   readonly effect?: string;
-  readonly hasEntryCondition?: boolean;
-  readonly tags?: readonly string[];
+  readonly hasEntryCondition: boolean;
+  readonly tags: readonly string[];
 }
