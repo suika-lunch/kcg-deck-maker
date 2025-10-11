@@ -68,7 +68,6 @@ export const useFilterStore = defineStore("filter", () => {
 
     const tags = new Set<string>();
     for (const card of cards) {
-      if (!card || !card.tags) continue;
       for (const t of card.tags) {
         tags.add(t);
       }
@@ -189,7 +188,6 @@ export const useFilterStore = defineStore("filter", () => {
     const tagSet = new Set(tags);
     const result: Card[] = [];
     for (const card of cards) {
-      if (!card || !card.tags) continue;
       if (operator === "AND") {
         // 選択された全タグを含むか
         const cardTagSet = new Set(card.tags);
