@@ -156,7 +156,6 @@ export const PRIORITY_TAGS: readonly string[] = [
 ] as const;
 
 // ID頭文字の表示ラベル。UI表示だけ差し替えたい場合に使用。
-// 例: { A: "英字A", a: "英字a", "#": "記号" }
 // 未定義キーはフォールバックで頭文字をそのまま表示する。
 export const ID_INITIAL_LABELS: Readonly<Record<string, string>> =
   Object.freeze({
@@ -168,7 +167,7 @@ export const ID_INITIAL_LABELS: Readonly<Record<string, string>> =
     F: "スターター2",
     G: "再生の花達",
     H: "IBA",
-    I: "神アート",
+    I: "アーコレ",
     J: "魔女の黒鳴",
     e: "プロモカード",
     p: "プロモパック",
