@@ -21,6 +21,7 @@ export const useFilterStore = defineStore("filter", () => {
     isFilterModalOpen: typeof isFilterModalOpen;
     filterCriteria: typeof filterCriteria;
     allTags: typeof allTags;
+    allIdInitials: typeof allIdInitials;
     sortedAndFilteredCards: typeof sortedAndFilteredCards;
     filterStats: typeof filterStats;
     allKinds: typeof CARD_KINDS;
@@ -33,6 +34,7 @@ export const useFilterStore = defineStore("filter", () => {
     toggleKindFilter: typeof toggleKindFilter;
     toggleTypeFilter: typeof toggleTypeFilter;
     toggleTagFilter: typeof toggleTagFilter;
+    toggleIdInitialFilter: typeof toggleIdInitialFilter;
     toggleEntryConditionFilter: typeof toggleEntryConditionFilter;
     toggleOnlyFavoritesFilter: typeof toggleOnlyFavoritesFilter;
     setTagOperator: typeof setTagOperator;
@@ -46,6 +48,7 @@ export const useFilterStore = defineStore("filter", () => {
     type: [],
     tags: [],
     tagOperator: "OR",
+    idInitials: [],
     hasEntryCondition: false,
     onlyFavorites: false,
   });
@@ -77,6 +80,27 @@ export const useFilterStore = defineStore("filter", () => {
   };
 
   // タグ抽出は都度実行
+  // ID頭文字の抽出
+  const allIdInitials = computed<readonly string[]>(() => {
+    const cardsStore = useCardsStore();
+    const cards = cardsStore.availableCards;
+    if (cards.length === 0) return readonly([]);
+    const set = new Set<string>();
+    for (const card of cards) {
+      if (!card || !card.id || card.id.length === 0) continue;
+      set.add(card.id.charAt(0)); // 大文字・小文字は区別
+    }
+    const arr = Array.from(set);
+    arr.sort((a, b) => {
+      const isUpper = (c: string) => c >= "A" && c <= "Z";
+      const isLower = (c: string) => c >= "a" && c <= "z";
+      const ra = isUpper(a) ? 0 : isLower(a) ? 1 : 2;
+      const rb = isUpper(b) ? 0 : isLower(b) ? 1 : 2;
+      if (ra !== rb) return ra - rb;
+      return a.localeCompare(b);
+    });
+    return readonly(arr);
+  });
 
   /**
    * 全タグリスト（優先タグを先頭に配置）- 最適化版
@@ -224,6 +248,7 @@ export const useFilterStore = defineStore("filter", () => {
     const hasKindFilter = criteria.kind.length > 0;
     const hasTypeFilter = criteria.type.length > 0;
     const hasTagFilter = criteria.tags.length > 0;
+    const hasIdInitialFilter = criteria.idInitials.length > 0;
     const hasEntryConditionFilter = criteria.hasEntryCondition === true;
     const hasOnlyFavoritesFilter = criteria.onlyFavorites === true;
 
@@ -233,6 +258,7 @@ export const useFilterStore = defineStore("filter", () => {
       !hasKindFilter &&
       !hasTypeFilter &&
       !hasTagFilter &&
+      !hasIdInitialFilter &&
       !hasEntryConditionFilter &&
       !hasOnlyFavoritesFilter
     ) {
@@ -251,6 +277,19 @@ export const useFilterStore = defineStore("filter", () => {
         criteria.tags,
         criteria.tagOperator,
       );
+      if (filteredCards.length === 0) return filteredCards; // 早期リターン
+    }
+
+    if (hasIdInitialFilter) {
+      const initialsSet = new Set(criteria.idInitials);
+      const result: Card[] = [];
+      for (const card of filteredCards) {
+        const first = card.id.charAt(0);
+        if (initialsSet.has(first)) {
+          result.push(card);
+        }
+      }
+      filteredCards = readonly(result);
       if (filteredCards.length === 0) return filteredCards; // 早期リターン
     }
 
@@ -338,6 +377,7 @@ export const useFilterStore = defineStore("filter", () => {
     if (criteria.kind.length > 0) return false;
     if (criteria.type.length > 0) return false;
     if (criteria.tags.length > 0) return false;
+    if (criteria.idInitials.length > 0) return false;
     if (criteria.hasEntryCondition) return false;
     if (criteria.onlyFavorites) return false;
     return true;
@@ -374,6 +414,7 @@ export const useFilterStore = defineStore("filter", () => {
       type: [],
       tags: [],
       tagOperator: "OR",
+      idInitials: [],
       hasEntryCondition: false,
       onlyFavorites: false,
     };
@@ -447,6 +488,24 @@ export const useFilterStore = defineStore("filter", () => {
   };
 
   /**
+   * ID頭文字フィルターを切り替え（大文字/小文字は区別）
+   */
+  const toggleIdInitialFilter = (initial: string): void => {
+    if (!initial || initial.length !== 1) return;
+    const current = [...filterCriteria.value.idInitials];
+    const idx = current.indexOf(initial);
+    if (idx > -1) {
+      current.splice(idx, 1);
+    } else {
+      current.push(initial);
+    }
+    filterCriteria.value = {
+      ...filterCriteria.value,
+      idInitials: current,
+    };
+  };
+
+  /**
    * 【登場条件】フィルターを切り替え
    */
   const toggleEntryConditionFilter = (): void => {
@@ -476,6 +535,7 @@ export const useFilterStore = defineStore("filter", () => {
     isFilterModalOpen,
     filterCriteria,
     allTags,
+    allIdInitials,
     sortedAndFilteredCards,
     filterStats,
 
@@ -492,6 +552,7 @@ export const useFilterStore = defineStore("filter", () => {
     toggleKindFilter,
     toggleTypeFilter,
     toggleTagFilter,
+    toggleIdInitialFilter,
     toggleEntryConditionFilter, // 追加
     toggleOnlyFavoritesFilter,
     setTagOperator,

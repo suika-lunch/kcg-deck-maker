@@ -41,6 +41,8 @@ export interface FilterCriteria {
   readonly tags: readonly string[];
   /** タグ条件の論理演算子（既定: OR） */
   readonly tagOperator: TagOperator;
+  /** ID頭文字フィルタ（大文字/小文字は区別） */
+  readonly idInitials: readonly string[];
   readonly hasEntryCondition: boolean;
   readonly onlyFavorites: boolean;
 }

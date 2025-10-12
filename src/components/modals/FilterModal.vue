@@ -17,6 +17,7 @@ import type { CardKind, CardType } from "../../types";
 import BaseButton from "../atoms/BaseButton.vue";
 import CheckboxRow from "../atoms/CheckboxRow.vue";
 import TabSwitch from "../molecules/TabSwitch.vue";
+import { ID_INITIAL_LABELS } from "../../constants";
 
 interface Props {
   isVisible: boolean;
@@ -36,6 +37,7 @@ const allKinds = computed(() => filterStore.allKinds);
 const allTypes = computed(() => filterStore.allTypes);
 const allTags = computed(() => filterStore.allTags);
 const filterStats = computed(() => filterStore.filterStats);
+const allIdInitials = computed(() => filterStore.allIdInitials);
 
 const isKindSelected = (kind: CardKind): boolean =>
   filterCriteria.value.kind.includes(kind);
@@ -43,6 +45,8 @@ const isTypeSelected = (type: CardType): boolean =>
   filterCriteria.value.type.includes(type);
 const isTagSelected = (tag: string): boolean =>
   filterCriteria.value.tags.includes(tag);
+const isIdInitialSelected = (ch: string): boolean =>
+  filterCriteria.value.idInitials.includes(ch);
 
 const tagOperatorModel = computed<string>({
   get: () => filterStore.filterCriteria.tagOperator,
@@ -162,15 +166,45 @@ const resetFilters = () => {
           </div>
         </div>
 
-        <div class="mb-4">
-          <CheckboxRow
-            :checked="filterCriteria.onlyFavorites"
-            @change="filterStore.toggleOnlyFavoritesFilter()"
-          >
-            <span class="text-sm font-medium">お気に入りのみ</span>
-          </CheckboxRow>
+        <div class="flex flex-wrap gap-4 mb-4">
+            <CheckboxRow
+              :checked="filterCriteria.onlyFavorites"
+              @change="filterStore.toggleOnlyFavoritesFilter()"
+            >
+              <span class="text-sm font-medium">お気に入りのみ</span>
+            </CheckboxRow>
+            <CheckboxRow
+              :checked="filterCriteria.hasEntryCondition"
+              @change="filterStore.toggleEntryConditionFilter()"
+            >
+              <span class="text-sm font-medium">【登場条件】で絞り込み</span>
+            </CheckboxRow>
         </div>
       </div>
+
+<div class="mb-4">
+  <label class="block text-sm font-medium mb-2">
+    収録弾で絞り込み
+    <span
+      v-if="filterCriteria.idInitials.length > 0"
+      class="text-blue-400 ml-1"
+    >
+      ({{ filterCriteria.idInitials.length }} 選択中)
+    </span>
+  </label>
+  <div
+    class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-10 xl:grid-cols-12 text-sm"
+  >
+    <CheckboxRow
+      v-for="ch in allIdInitials"
+      :key="ch"
+      :checked="isIdInitialSelected(ch)"
+      @change="filterStore.toggleIdInitialFilter(ch)"
+    >
+      {{ ID_INITIAL_LABELS[ch] ?? ch }}
+    </CheckboxRow>
+  </div>
+</div>
 
       <div class="mb-4">
         <label class="block text-sm font-medium mb-2">
@@ -214,15 +248,6 @@ const resetFilters = () => {
             {{ type }}
           </CheckboxRow>
         </div>
-      </div>
-
-      <div class="mb-4">
-        <CheckboxRow
-          :checked="filterCriteria.hasEntryCondition"
-          @change="filterStore.toggleEntryConditionFilter()"
-        >
-          <span class="text-sm font-medium">【登場条件】で絞り込み</span>
-        </CheckboxRow>
       </div>
 
       <div class="min-h-0 flex-1 flex flex-col">

@@ -1,12 +1,4 @@
 <!--
-  CardListSection.vue
-  目的: カード一覧の表示/クリック操作(追加・枚数増加)と画像の長押し拡大を提供する UI 中心の層
-  付記: お気に入り状態の参照/切替のため favorites ストアを使用する
-  入力: Props.availableCards, sortedAndFilteredCards, deckCards, isLoading, error
-  出力: Emits(openFilter, addCard, incrementCard, decrementCard, openImageModal)
-  留意: ドメイン制約(MAX_CARD_COPIES)は表示制御のみで、最終判定は親/ドメイン層に委譲
--->
-<!--
   仕様
   - 目的: カード一覧の表示と操作（追加/増減/画像拡大）。
   - 入力(Props):

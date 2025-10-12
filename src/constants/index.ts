@@ -154,3 +154,21 @@ export const PRIORITY_TAGS: readonly string[] = [
   "阿栖&亜留",
   "魔女の娘たち",
 ] as const;
+
+// ID頭文字の表示ラベル。UI表示だけ差し替えたい場合に使用。
+// 未定義キーはフォールバックで頭文字をそのまま表示する。
+export const ID_INITIAL_LABELS: Readonly<Record<string, string>> =
+  Object.freeze({
+    A: "スターター1",
+    B: "開演の魔女",
+    C: "神コレ",
+    D: "結束の連歌",
+    E: "御伽噺",
+    F: "スターター2",
+    G: "再生の花達",
+    H: "IBA",
+    I: "アーコレ",
+    J: "魔女の黒鳴",
+    e: "プロモカード",
+    p: "プロモパック",
+  });
