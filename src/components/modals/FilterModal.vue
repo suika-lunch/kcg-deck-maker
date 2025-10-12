@@ -167,44 +167,44 @@ const resetFilters = () => {
         </div>
 
         <div class="flex flex-wrap gap-4 mb-4">
-            <CheckboxRow
-              :checked="filterCriteria.onlyFavorites"
-              @change="filterStore.toggleOnlyFavoritesFilter()"
-            >
-              <span class="text-sm font-medium">お気に入りのみ</span>
-            </CheckboxRow>
-            <CheckboxRow
-              :checked="filterCriteria.hasEntryCondition"
-              @change="filterStore.toggleEntryConditionFilter()"
-            >
-              <span class="text-sm font-medium">【登場条件】で絞り込み</span>
-            </CheckboxRow>
+          <CheckboxRow
+            :checked="filterCriteria.onlyFavorites"
+            @change="filterStore.toggleOnlyFavoritesFilter()"
+          >
+            <span class="text-sm font-medium">お気に入りのみ</span>
+          </CheckboxRow>
+          <CheckboxRow
+            :checked="filterCriteria.hasEntryCondition"
+            @change="filterStore.toggleEntryConditionFilter()"
+          >
+            <span class="text-sm font-medium">【登場条件】で絞り込み</span>
+          </CheckboxRow>
         </div>
       </div>
 
-<div class="mb-4">
-  <label class="block text-sm font-medium mb-2">
-    収録弾で絞り込み
-    <span
-      v-if="filterCriteria.idInitials.length > 0"
-      class="text-blue-400 ml-1"
-    >
-      ({{ filterCriteria.idInitials.length }} 選択中)
-    </span>
-  </label>
-  <div
-    class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-10 xl:grid-cols-12 text-sm"
-  >
-    <CheckboxRow
-      v-for="ch in allIdInitials"
-      :key="ch"
-      :checked="isIdInitialSelected(ch)"
-      @change="filterStore.toggleIdInitialFilter(ch)"
-    >
-      {{ ID_INITIAL_LABELS[ch] ?? ch }}
-    </CheckboxRow>
-  </div>
-</div>
+      <div class="mb-4">
+        <label class="block text-sm font-medium mb-2">
+          収録弾で絞り込み
+          <span
+            v-if="filterCriteria.idInitials.length > 0"
+            class="text-blue-400 ml-1"
+          >
+            ({{ filterCriteria.idInitials.length }} 選択中)
+          </span>
+        </label>
+        <div
+          class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-10 xl:grid-cols-12 text-sm"
+        >
+          <CheckboxRow
+            v-for="ch in allIdInitials"
+            :key="ch"
+            :checked="isIdInitialSelected(ch)"
+            @change="filterStore.toggleIdInitialFilter(ch)"
+          >
+            {{ ID_INITIAL_LABELS[ch] ?? ch }}
+          </CheckboxRow>
+        </div>
+      </div>
 
       <div class="mb-4">
         <label class="block text-sm font-medium mb-2">
@@ -216,7 +216,7 @@ const resetFilters = () => {
             ({{ filterCriteria.kind.length }} 選択中)
           </span>
         </label>
-        <div class="grid grid-cols-2 sm:grid-cols-4 text-sm">
+        <div class="grid grid-cols-4 text-sm">
           <CheckboxRow
             v-for="kind in allKinds"
             :key="kind"
@@ -238,7 +238,7 @@ const resetFilters = () => {
             ({{ filterCriteria.type.length }} 選択中)
           </span>
         </label>
-        <div class="grid grid-cols-3 sm:grid-cols-5 text-sm">
+        <div class="grid grid-cols-5 md:grid-cols-9 text-sm">
           <CheckboxRow
             v-for="type in allTypes"
             :key="type"
