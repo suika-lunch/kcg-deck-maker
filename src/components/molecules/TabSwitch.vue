@@ -24,7 +24,7 @@
       @click="$emit('update:modelValue', opt.value)"
       :aria-pressed="opt.value === modelValue"
       type="button"
-      class="relative z-10 min-w-0 flex-1 rounded-md px-3 py-1 text-sm font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
+      class="relative z-10 inline-flex min-w-0 flex-1 items-center justify-center rounded-md px-3 py-1 text-center text-sm font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
       :class="[
         opt.value === modelValue
           ? 'text-white'
