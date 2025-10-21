@@ -89,6 +89,12 @@ const toggleTag = (tag: string) => {
 const resetFilters = () => {
   filterStore.resetFilterCriteria();
 };
+
+// 折りたたみ状態（初期は全て展開）
+const isIdInitialsOpen = ref(true);
+const isKindsOpen = ref(true);
+const isTypesOpen = ref(true);
+const isTagsOpen = ref(true);
 </script>
 
 <template>
@@ -183,16 +189,23 @@ const resetFilters = () => {
       </div>
 
       <div class="mb-4">
-        <label class="mb-2 block text-sm font-medium">
-          収録弾で絞り込み
-          <span
-            v-if="filterCriteria.idInitials.length > 0"
-            class="ml-1 text-blue-400"
-          >
-            ({{ filterCriteria.idInitials.length }} 選択中)
+        <button
+          type="button"
+          class="mb-2 flex items-center justify-between text-left text-sm font-medium"
+          @click="isIdInitialsOpen = !isIdInitialsOpen"
+        >
+          <span>
+            収録弾で絞り込み
+            <span
+              v-if="filterCriteria.idInitials.length > 0"
+              class="ml-1 text-blue-400"
+            >
+              ({{ filterCriteria.idInitials.length }} 選択中)
+            </span>
           </span>
-        </label>
+        </button>
         <div
+          v-show="isIdInitialsOpen"
           class="grid grid-cols-3 text-sm sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-10 xl:grid-cols-12"
         >
           <CheckboxRow
@@ -207,16 +220,22 @@ const resetFilters = () => {
       </div>
 
       <div class="mb-4">
-        <label class="mb-2 block text-sm font-medium">
-          種類で絞り込み
-          <span
-            v-if="filterCriteria.kind.length > 0"
-            class="ml-1 text-blue-400"
-          >
-            ({{ filterCriteria.kind.length }} 選択中)
+        <button
+          type="button"
+          class="mb-2 flex items-center justify-between text-left text-sm font-medium"
+          @click="isKindsOpen = !isKindsOpen"
+        >
+          <span>
+            種類で絞り込み
+            <span
+              v-if="filterCriteria.kind.length > 0"
+              class="ml-1 text-blue-400"
+            >
+              ({{ filterCriteria.kind.length }} 選択中)
+            </span>
           </span>
-        </label>
-        <div class="grid grid-cols-4 text-sm">
+        </button>
+        <div v-show="isKindsOpen" class="grid grid-cols-4 text-sm">
           <CheckboxRow
             v-for="kind in allKinds"
             :key="kind"
@@ -229,16 +248,25 @@ const resetFilters = () => {
       </div>
 
       <div class="mb-4">
-        <label class="mb-2 block text-sm font-medium">
-          タイプで絞り込み
-          <span
-            v-if="filterCriteria.type.length > 0"
-            class="ml-1 text-blue-400"
-          >
-            ({{ filterCriteria.type.length }} 選択中)
+        <button
+          type="button"
+          class="mb-2 flex items-center justify-between text-left text-sm font-medium"
+          @click="isTypesOpen = !isTypesOpen"
+        >
+          <span>
+            タイプで絞り込み
+            <span
+              v-if="filterCriteria.type.length > 0"
+              class="ml-1 text-blue-400"
+            >
+              ({{ filterCriteria.type.length }} 選択中)
+            </span>
           </span>
-        </label>
-        <div class="grid grid-cols-5 text-sm md:grid-cols-9">
+        </button>
+        <div
+          v-show="isTypesOpen"
+          class="grid grid-cols-5 text-sm md:grid-cols-9"
+        >
           <CheckboxRow
             v-for="type in allTypes"
             :key="type"
@@ -251,10 +279,12 @@ const resetFilters = () => {
       </div>
 
       <div class="flex min-h-0 flex-1 flex-col">
-        <div
-          class="mb-2 flex shrink-0 flex-wrap items-center justify-between gap-2"
-        >
-          <label class="block text-sm font-medium">
+        <div class="mb-2 flex shrink-0 flex-wrap items-center justify-between">
+          <button
+            type="button"
+            class="flex items-center justify-between text-left text-sm font-medium"
+            @click="isTagsOpen = !isTagsOpen"
+          >
             タグで絞り込み
             <span
               v-if="filterCriteria.tags.length > 0"
@@ -262,8 +292,9 @@ const resetFilters = () => {
             >
               ({{ filterCriteria.tags.length }} 選択中)
             </span>
-          </label>
+          </button>
           <TabSwitch
+            class="px-0 py-0"
             v-model="tagOperatorModel"
             :options="[
               { label: 'OR', value: 'OR' },
@@ -272,6 +303,7 @@ const resetFilters = () => {
           />
         </div>
         <div
+          v-show="isTagsOpen"
           class="grid flex-1 grid-cols-2 overflow-y-auto pr-2 text-sm sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5"
         >
           <CheckboxRow
