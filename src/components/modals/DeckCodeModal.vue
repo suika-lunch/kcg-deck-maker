@@ -106,7 +106,11 @@ const emit = defineEmits<Emits>();
             emit('updateImportCode', ($event.target as HTMLInputElement).value)
           "
           @contextmenu.stop
-          class="grow rounded border border-gray-600 bg-gray-700 px-3 py-2 text-sm focus:border-blue-500 focus:ring focus:outline-none"
+          autocapitalize="off"
+          autocomplete="off"
+          spellcheck="false"
+          inputmode="text"
+          class="grow rounded border border-gray-600 bg-gray-700 px-3 py-2 text-sm focus-visible:border-blue-500 focus-visible:ring focus-visible:outline-none"
           placeholder="デッキコードを入力"
         />
         <BaseButton
@@ -122,6 +126,8 @@ const emit = defineEmits<Emits>();
 
     <div
       v-if="error"
+      role="alert"
+      aria-live="assertive"
       class="mb-1 rounded border border-red-700 bg-red-900/50 p-3 text-sm text-red-300"
     >
       {{ error }}

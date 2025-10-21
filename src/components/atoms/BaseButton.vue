@@ -17,12 +17,9 @@
     :type="type"
     :disabled="disabled || loading"
     :aria-disabled="disabled || loading"
-    class="inline-flex items-center justify-center rounded font-medium transition-all duration-200 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 focus-visible:outline-none"
-    :class="[
-      variantClass,
-      sizeClass,
-      (disabled || loading) && 'disabled:cursor-not-allowed',
-    ]"
+    :aria-busy="loading"
+    class="inline-flex items-center justify-center rounded font-medium transition-all duration-200 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 focus-visible:outline-none"
+    :class="[variantClass, sizeClass, 'disabled:cursor-not-allowed']"
   >
     <span v-if="loading" class="mr-1 inline-flex">
       <svg class="h-4 w-4 animate-spin" fill="none" viewBox="0 0 24 24">

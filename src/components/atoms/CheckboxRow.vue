@@ -15,7 +15,7 @@
       type="checkbox"
       :checked="checked"
       @change="$emit('change')"
-      class="form-checkbox h-4 w-4 rounded border-gray-600 bg-gray-700 text-blue-600"
+      class="form-checkbox h-4 w-4 rounded border-gray-600 accent-blue-600"
     />
     <span class="ml-2"><slot /></span>
   </label>

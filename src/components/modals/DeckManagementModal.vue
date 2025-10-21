@@ -112,7 +112,7 @@ const closeModal = () => {
           type="text"
           v-model="newDeckName"
           :placeholder="currentDeckName || 'デッキ名を入力'"
-          class="w-full rounded border border-gray-600 bg-gray-700 px-3 py-2 text-sm text-slate-200 placeholder-slate-400 focus:border-blue-500 focus:ring focus:outline-none"
+          class="w-full rounded border border-gray-600 bg-gray-700 px-3 py-2 text-sm text-slate-200 placeholder-slate-400 focus-visible:border-blue-500 focus-visible:ring focus-visible:outline-none"
         />
       </div>
       <div class="mb-4">
@@ -123,6 +123,7 @@ const closeModal = () => {
           :value="currentDeckCode || ''"
           readonly
           @contextmenu.stop
+          @focus="($event.target as HTMLInputElement).select()"
           class="h-24 w-full resize-none rounded border border-gray-600 bg-gray-700 px-3 py-2 text-sm text-slate-200 placeholder-slate-400"
         ></textarea>
       </div>
