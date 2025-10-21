@@ -15,7 +15,7 @@
 <template>
   <div
     v-if="isVisible"
-    class="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 p-4"
+    class="fixed inset-0 z-9999 flex items-center justify-center bg-black/80 p-4"
     role="dialog"
     aria-modal="true"
     aria-labelledby="modal-title"
@@ -24,7 +24,7 @@
   >
     <div
       ref="modalContent"
-      class="relative max-w-[98vw] max-h-[98vh] outline-none"
+      class="relative max-h-[98vh] max-w-[98vw] outline-none"
       @click.stop
       tabindex="-1"
     >
@@ -41,7 +41,7 @@
           :src="imageSrc"
           :alt="imageAltText"
           crossorigin="anonymous"
-          class="max-w-[98vw] max-h-[98vh] object-contain shadow-2xl"
+          class="max-h-[98vh] max-w-[98vw] object-contain shadow-2xl"
           @error="onModalImageError"
           @load="isImageLoading = false"
         />

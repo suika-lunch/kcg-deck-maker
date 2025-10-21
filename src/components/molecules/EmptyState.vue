@@ -8,12 +8,12 @@
   - 副作用: なし（表示専用）
 -->
 <template>
-  <div class="col-span-full text-center mt-2 sm:mt-4">
-    <div class="flex flex-col items-center gap-1 sm:gap-2 p-2 sm:p-4">
+  <div class="col-span-full mt-2 text-center sm:mt-4">
+    <div class="flex flex-col items-center gap-1 p-2 sm:gap-2 sm:p-4">
       <div :class="iconWrapperClass">
         <slot name="icon">
           <svg
-            class="w-4 h-4 sm:w-5 sm:h-5 text-slate-400"
+            class="h-4 w-4 text-slate-400 sm:h-5 sm:w-5"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -28,7 +28,7 @@
         </slot>
       </div>
       <div class="text-center" :class="messageColorClass">
-        <p class="text-sm sm:text-base font-medium mb-1">
+        <p class="mb-1 text-sm font-medium sm:text-base">
           <slot name="title">データが見つかりません</slot>
         </p>
         <p class="text-xs">

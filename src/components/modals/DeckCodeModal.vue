@@ -51,21 +51,21 @@ const emit = defineEmits<Emits>();
     </template>
 
     <div class="mb-4">
-      <h4 class="text-sm font-medium mb-2">スラッシュ区切りデッキコード</h4>
+      <h4 class="mb-2 text-sm font-medium">スラッシュ区切りデッキコード</h4>
       <div
-        class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2"
+        class="flex flex-col items-stretch gap-2 sm:flex-row sm:items-center"
       >
         <input
           type="text"
           :value="slashDeckCode"
           readonly
-          class="flex-grow px-3 py-2 text-sm rounded bg-gray-700 border border-gray-600"
+          class="grow rounded border border-gray-600 bg-gray-700 px-3 py-2 text-sm"
         />
         <BaseButton
           variant="primary"
           size="md"
           @click="emit('copySlashCode')"
-          class="whitespace-nowrap min-w-24"
+          class="min-w-24 whitespace-nowrap"
         >
           コピー
         </BaseButton>
@@ -73,21 +73,21 @@ const emit = defineEmits<Emits>();
     </div>
 
     <div class="mb-4">
-      <h4 class="text-sm font-medium mb-2">KCG形式デッキコード</h4>
+      <h4 class="mb-2 text-sm font-medium">KCG形式デッキコード</h4>
       <div
-        class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2"
+        class="flex flex-col items-stretch gap-2 sm:flex-row sm:items-center"
       >
         <input
           type="text"
           :value="kcgDeckCode"
           readonly
-          class="flex-grow px-3 py-2 text-sm rounded bg-gray-700 border border-gray-600"
+          class="grow rounded border border-gray-600 bg-gray-700 px-3 py-2 text-sm"
         />
         <BaseButton
           variant="primary"
           size="md"
           @click="emit('copyKcgCode')"
-          class="whitespace-nowrap min-w-24"
+          class="min-w-24 whitespace-nowrap"
         >
           コピー
         </BaseButton>
@@ -95,9 +95,9 @@ const emit = defineEmits<Emits>();
     </div>
 
     <div class="mb-4">
-      <h4 class="text-sm font-medium mb-2">デッキコードをインポート</h4>
+      <h4 class="mb-2 text-sm font-medium">デッキコードをインポート</h4>
       <div
-        class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2"
+        class="flex flex-col items-stretch gap-2 sm:flex-row sm:items-center"
       >
         <input
           type="text"
@@ -106,14 +106,18 @@ const emit = defineEmits<Emits>();
             emit('updateImportCode', ($event.target as HTMLInputElement).value)
           "
           @contextmenu.stop
-          class="flex-grow px-3 py-2 text-sm rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring focus:border-blue-500"
+          autocapitalize="off"
+          autocomplete="off"
+          spellcheck="false"
+          inputmode="text"
+          class="grow rounded border border-gray-600 bg-gray-700 px-3 py-2 text-sm focus-visible:border-blue-500 focus-visible:ring focus-visible:outline-none"
           placeholder="デッキコードを入力"
         />
         <BaseButton
           variant="success"
           size="md"
           @click="emit('importCode')"
-          class="whitespace-nowrap min-w-24"
+          class="min-w-24 whitespace-nowrap"
         >
           インポート
         </BaseButton>
@@ -122,7 +126,9 @@ const emit = defineEmits<Emits>();
 
     <div
       v-if="error"
-      class="mb-1 p-3 bg-red-900/50 border border-red-700 rounded text-red-300 text-sm"
+      role="alert"
+      aria-live="assertive"
+      class="mb-1 rounded border border-red-700 bg-red-900/50 p-3 text-sm text-red-300"
     >
       {{ error }}
     </div>

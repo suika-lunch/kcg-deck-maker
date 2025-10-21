@@ -14,7 +14,7 @@
 <template>
   <div
     v-if="modelValue"
-    class="fixed inset-0 z-[1000] flex items-center justify-center bg-black/70 p-4"
+    class="fixed inset-0 z-1000 flex items-center justify-center bg-black/70 p-4"
     role="dialog"
     aria-modal="true"
     :aria-labelledby="ariaLabelledby || undefined"
@@ -22,39 +22,45 @@
   >
     <div
       ref="container"
-      class="relative w-full max-w-md max-h-[90vh] overflow-auto rounded-lg bg-slate-800 border border-slate-700 shadow-2xl outline-none"
+      class="relative max-h-[90vh] w-full max-w-md overflow-auto rounded-lg border border-slate-700 bg-slate-800 shadow-2xl outline-none"
       tabindex="-1"
       @keydown.esc.prevent.stop="emitClose"
       @click.stop
     >
-      <header v-if="$slots['header']" class="border-b border-slate-700 p-4">
-        <slot name="header" />
+      <header
+        v-if="$slots['header'] || closable"
+        class="border-b border-slate-700 p-4"
+      >
+        <div class="flex items-center justify-between gap-4">
+          <div class="min-w-0">
+            <slot name="header" />
+          </div>
+          <BaseButton
+            v-if="closable"
+            variant="ghost"
+            size="sm"
+            @click="emitClose"
+          >
+            閉じる
+          </BaseButton>
+        </div>
       </header>
       <section class="p-4">
         <slot />
       </section>
       <footer
         v-if="$slots['footer']"
-        class="border-t border-slate-700 p-4 bg-slate-700/50"
+        class="border-t border-slate-700 bg-slate-700/50 p-4"
       >
         <slot name="footer" />
       </footer>
-
-      <button
-        v-if="closable"
-        type="button"
-        class="absolute top-3 right-3 text-slate-400 hover:text-slate-100 transition-colors"
-        aria-label="閉じる"
-        @click="emitClose"
-      >
-        ×
-      </button>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, watch, nextTick, onUnmounted } from "vue";
+import BaseButton from "./BaseButton.vue";
 
 interface Props {
   modelValue: boolean;

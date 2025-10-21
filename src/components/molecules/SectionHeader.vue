@@ -8,9 +8,9 @@
   - 副作用: なし（表示専用）
 -->
 <template>
-  <div class="flex items-center justify-between mb-1 px-1">
+  <div class="mb-1 flex items-center justify-between px-1">
     <h2
-      class="text-sm sm:text-base font-bold text-slate-100 flex items-center gap-1"
+      class="flex items-center gap-1 text-sm font-bold text-slate-100 sm:text-base"
     >
       <slot name="icon" />
       <slot />

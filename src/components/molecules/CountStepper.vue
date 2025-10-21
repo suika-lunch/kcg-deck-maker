@@ -13,16 +13,16 @@
   - 副作用: なし（表示・イベントのみ）
 -->
 <template>
-  <div class="w-full px-1 flex items-center justify-center gap-1">
+  <div class="flex w-full items-center justify-center gap-1 px-1">
     <button
       type="button"
-      class="w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white rounded-full flex items-center justify-center leading-none transition-all duration-200 shadow-lg hover:shadow-red-500/25"
+      class="flex h-6 w-6 items-center justify-center rounded-full bg-linear-to-r from-red-500 to-red-600 leading-none text-white shadow-lg transition-all duration-200 hover:from-red-600 hover:to-red-700 hover:shadow-red-500/25 sm:h-8 sm:w-8"
       :aria-label="decrementAriaLabel"
       @click="$emit('decrement')"
     >
       <slot name="minusIcon">
         <svg
-          class="w-3 h-3 sm:w-4 sm:h-4"
+          class="h-3 w-3 sm:h-4 sm:w-4"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -38,7 +38,7 @@
     </button>
 
     <div
-      class="w-7 h-6 sm:w-9 sm:h-8 font-bold text-center flex items-center justify-center bg-slate-900/80 backdrop-blur-sm rounded-lg border border-slate-600/50 text-white text-sm sm:text-base"
+      class="flex h-6 w-7 items-center justify-center rounded-lg border border-slate-600/50 bg-slate-900/80 text-center text-sm font-bold text-white backdrop-blur-sm sm:h-8 sm:w-9 sm:text-base"
       :aria-live="ariaLive"
     >
       {{ count }}
@@ -46,7 +46,7 @@
 
     <button
       type="button"
-      class="w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white rounded-full flex items-center justify-center leading-none transition-all duration-200 shadow-lg hover:shadow-emerald-500/25 disabled:from-slate-600 disabled:to-slate-700 disabled:cursor-not-allowed"
+      class="flex h-6 w-6 items-center justify-center rounded-full bg-linear-to-r from-emerald-500 to-emerald-600 leading-none text-white shadow-lg transition-all duration-200 hover:from-emerald-600 hover:to-emerald-700 hover:shadow-emerald-500/25 disabled:cursor-not-allowed disabled:from-slate-600 disabled:to-slate-700 sm:h-8 sm:w-8"
       :disabled="isIncrementDisabled"
       :aria-disabled="isIncrementDisabled"
       :aria-label="incrementAriaLabel"
@@ -54,7 +54,7 @@
     >
       <slot name="plusIcon">
         <svg
-          class="w-3 h-3 sm:w-4 sm:h-4"
+          class="h-3 w-3 sm:h-4 sm:w-4"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"

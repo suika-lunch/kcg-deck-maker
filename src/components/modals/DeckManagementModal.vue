@@ -104,7 +104,7 @@ const closeModal = () => {
       <div class="mb-4">
         <label
           for="deckNameInput"
-          class="block text-slate-300 text-sm font-bold mb-2"
+          class="mb-2 block text-sm font-bold text-slate-300"
           >現在のデッキ名:</label
         >
         <input
@@ -112,17 +112,19 @@ const closeModal = () => {
           type="text"
           v-model="newDeckName"
           :placeholder="currentDeckName || 'デッキ名を入力'"
-          class="w-full px-3 py-2 text-sm rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring focus:border-blue-500 text-slate-200 placeholder-slate-400"
+          class="w-full rounded border border-gray-600 bg-gray-700 px-3 py-2 text-sm text-slate-200 placeholder-slate-400 focus-visible:border-blue-500 focus-visible:ring focus-visible:outline-none"
         />
       </div>
       <div class="mb-4">
-        <label class="block text-slate-300 text-sm font-bold mb-2"
+        <label class="mb-2 block text-sm font-bold text-slate-300"
           >現在のデッキコード:</label
         >
         <textarea
           :value="currentDeckCode || ''"
           readonly
-          class="w-full px-3 py-2 text-sm rounded bg-gray-700 border border-gray-600 text-slate-200 placeholder-slate-400 h-24 resize-none"
+          @contextmenu.stop
+          @focus="($event.target as HTMLInputElement).select()"
+          class="h-24 w-full resize-none rounded border border-gray-600 bg-gray-700 px-3 py-2 text-sm text-slate-200 placeholder-slate-400"
         ></textarea>
       </div>
       <BaseButton
@@ -137,7 +139,7 @@ const closeModal = () => {
       <BaseButton
         variant="success"
         size="md"
-        class="w-full mt-2 bg-emerald-600 hover:bg-emerald-700"
+        class="mt-2 w-full bg-emerald-600 hover:bg-emerald-700"
         @click="saveDeckAsJpeg"
       >
         デッキ画像を保存
@@ -147,14 +149,14 @@ const closeModal = () => {
     <div v-else>
       <div v-if="deckManagementStore.savedDecks.length > 0">
         <ul
-          class="max-h-60 overflow-y-auto mb-4 border border-slate-700 rounded"
+          class="mb-4 max-h-60 overflow-y-auto rounded border border-slate-700"
         >
           <li
             v-for="deck in deckManagementStore.savedDecks"
             :key="deck.name"
-            class="flex justify-between items-center p-3 border-b border-slate-700 last:border-b-0 hover:bg-slate-700 transition-colors"
+            class="flex items-center justify-between border-b border-slate-700 p-3 transition-colors last:border-b-0 hover:bg-slate-700"
           >
-            <span class="text-slate-200 font-medium">{{ deck.name }}</span>
+            <span class="font-medium text-slate-200">{{ deck.name }}</span>
             <div class="flex space-x-2">
               <BaseButton
                 variant="primary"
@@ -174,7 +176,7 @@ const closeModal = () => {
           </li>
         </ul>
       </div>
-      <div v-else class="text-center text-slate-400 py-8">
+      <div v-else class="py-8 text-center text-slate-400">
         保存されたデッキはありません。
       </div>
     </div>

@@ -14,7 +14,7 @@
 -->
 <template>
   <div
-    class="w-full relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-all duration-200"
+    class="relative w-full overflow-hidden rounded-lg shadow-lg transition-all duration-200 hover:shadow-xl"
     :ref="setRef"
     @contextmenu.prevent
   >
@@ -23,12 +23,12 @@
       :alt="alt"
       loading="lazy"
       crossorigin="anonymous"
-      class="block w-full h-full object-cover transition-transform duration-200 select-none"
+      class="block h-full w-full object-cover transition-transform duration-200 select-none"
       @error="(e) => $emit('error', e)"
     />
     <div
       v-if="overlay"
-      class="absolute inset-0 bg-gradient-to-t from-slate-900/50 via-transparent to-transparent pointer-events-none"
+      class="pointer-events-none absolute inset-0 bg-linear-to-t from-slate-900/50 via-transparent to-transparent"
     ></div>
     <slot name="overlay" />
   </div>

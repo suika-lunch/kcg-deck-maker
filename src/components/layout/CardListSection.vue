@@ -96,12 +96,12 @@ const onListImageError = (e: Event) => {
 
 <template>
   <div
-    class="flex flex-col flex-grow h-1/2 p-1 sm:p-2 overflow-hidden relative z-10"
+    class="relative z-10 flex h-1/2 grow flex-col overflow-hidden p-1 sm:p-2"
   >
     <SectionHeader>
       <template #icon>
         <svg
-          class="w-4 h-4"
+          class="h-4 w-4"
           fill="oklch(70.7% 0.165 254.624)"
           stroke="currentColor"
           viewBox="0 -960 960 960"
@@ -122,7 +122,7 @@ const onListImageError = (e: Event) => {
         >
           <span class="flex items-center gap-1">
             <svg
-              class="w-3 h-3"
+              class="h-3 w-3"
               fill="white"
               stroke="currentColor"
               viewBox="0 -960 960 960"
@@ -139,13 +139,13 @@ const onListImageError = (e: Event) => {
     </SectionHeader>
 
     <div
-      class="flex-grow overflow-y-auto grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 md:gap-3 lg:gap-4 p-1 sm:p-2 bg-slate-800/40 backdrop-blur-sm rounded border border-slate-700/50 shadow-xl"
+      class="grid grow grid-cols-3 gap-2 overflow-y-auto rounded border border-slate-700/50 bg-slate-800/40 p-1 shadow-xl backdrop-blur-sm sm:p-2 md:grid-cols-4 md:gap-3 lg:grid-cols-5 lg:gap-4"
     >
-      <div v-if="isLoading" class="col-span-full text-center mt-2 sm:mt-4">
-        <div class="flex flex-col items-center gap-1 sm:gap-2 p-2 sm:p-4">
+      <div v-if="isLoading" class="col-span-full mt-2 text-center sm:mt-4">
+        <div class="flex flex-col items-center gap-1 p-2 sm:gap-2 sm:p-4">
           <BaseSpinner size="md">読み込み中...</BaseSpinner>
-          <div class="text-slate-400 text-center">
-            <p class="text-sm sm:text-base font-medium mb-1">読み込み中...</p>
+          <div class="text-center text-slate-400">
+            <p class="mb-1 text-sm font-medium sm:text-base">読み込み中...</p>
             <p class="text-xs">カードデータを取得しています</p>
           </div>
         </div>
@@ -156,7 +156,7 @@ const onListImageError = (e: Event) => {
         <template #description>{{ error }}</template>
         <template #icon>
           <svg
-            class="w-4 h-4 sm:w-5 sm:h-5 text-red-400"
+            class="h-4 w-4 text-red-400 sm:h-5 sm:w-5"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -180,7 +180,7 @@ const onListImageError = (e: Event) => {
         v-else
         v-for="card in props.sortedAndFilteredCards"
         :key="card.id"
-        class="group flex flex-col items-center relative transition-all duration-200"
+        class="group relative flex flex-col items-center transition-all duration-200"
         :title="
           getCardInDeck(card.id) > 0
             ? '長押し: 拡大表示'
@@ -204,11 +204,11 @@ const onListImageError = (e: Event) => {
 
             <template v-if="getCardInDeck(card.id) > 0">
               <div
-                class="absolute inset-0 bg-gradient-to-t from-slate-900/50 via-transparent to-transparent pointer-events-none"
+                class="pointer-events-none absolute inset-0 bg-linear-to-t from-slate-900/50 via-transparent to-transparent"
               ></div>
 
               <div
-                class="absolute bottom-2 w-full px-1 flex items-center justify-center"
+                class="absolute bottom-2 flex w-full items-center justify-center px-1"
                 @click.stop
               >
                 <CountStepper
