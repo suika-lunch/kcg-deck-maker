@@ -10,14 +10,14 @@
 <template>
   <button
     type="button"
-    class="absolute top-2 left-1 z-20 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 rounded"
+    class="absolute top-2 left-1 z-20 cursor-pointer rounded focus-visible:ring-2 focus-visible:ring-yellow-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 focus-visible:outline-none"
     @click.stop="$emit('toggle')"
     :title="pressed ? 'お気に入り解除' : 'お気に入り登録'"
     :aria-pressed="pressed"
     :aria-label="pressed ? 'お気に入り解除' : 'お気に入り登録'"
   >
     <svg
-      class="w-7 h-7 sm:w-8 sm:h-8 p-0.5 transition-transform duration-200 hover:scale-110"
+      class="h-7 w-7 p-0.5 transition-transform duration-200 hover:scale-110 sm:h-8 sm:w-8"
       :class="pressed ? 'text-yellow-400' : 'text-gray-400/70'"
       fill="currentColor"
       viewBox="0 0 24 24"

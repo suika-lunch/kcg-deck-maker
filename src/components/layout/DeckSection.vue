@@ -86,13 +86,13 @@ const onDeckImageError = (e: Event) => {
 
 <template>
   <div
-    class="flex flex-col flex-grow-0 h-1/2 p-1 sm:p-2 border-b border-slate-700/50 relative z-10 backdrop-blur-sm"
+    class="relative z-10 flex h-1/2 grow-0 flex-col border-b border-slate-700/50 p-1 backdrop-blur-sm sm:p-2"
   >
     <div class="mb-1 px-1">
-      <div class="flex items-center w-full">
+      <div class="flex w-full items-center">
         <label
           for="deckName"
-          class="mr-1 sm:mr-2 text-xs font-medium text-slate-300 whitespace-nowrap"
+          class="mr-1 text-xs font-medium whitespace-nowrap text-slate-300 sm:mr-2"
           >デッキ名:</label
         >
         <input
@@ -100,17 +100,17 @@ const onDeckImageError = (e: Event) => {
           type="text"
           :value="deckName"
           @input="updateDeckName(($event.target as HTMLInputElement).value)"
-          class="flex-grow px-1 sm:px-2 py-0.5 sm:py-1 text-xs sm:text-base rounded bg-slate-800/80 border border-slate-600/50 focus:outline-none focus:ring-1 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all duration-200 backdrop-blur-sm placeholder-slate-400"
+          class="grow rounded border border-slate-600/50 bg-slate-800/80 px-1 py-0.5 text-xs placeholder-slate-400 backdrop-blur-sm transition-all duration-200 focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/50 focus:outline-none sm:px-2 sm:py-1 sm:text-base"
           placeholder="デッキ名を入力"
         />
       </div>
     </div>
 
-    <div class="flex flex-wrap gap-1 mb-1 px-1">
+    <div class="mb-1 flex flex-wrap gap-1 px-1">
       <BaseButton
         variant="primary"
         size="xs"
-        class="group relative flex-1 min-w-0"
+        class="group relative min-w-0 flex-1"
         @click="emit('generateDeckCode')"
         :disabled="props.isGeneratingCode"
         :loading="props.isGeneratingCode"
@@ -118,7 +118,7 @@ const onDeckImageError = (e: Event) => {
       >
         <span class="flex items-center justify-center gap-1">
           <svg
-            class="w-3 h-3"
+            class="h-3 w-3"
             fill="white"
             stroke="currentColor"
             viewBox="0 -960 960 960"
@@ -135,7 +135,7 @@ const onDeckImageError = (e: Event) => {
       <BaseButton
         variant="success"
         size="xs"
-        class="group relative flex-1 min-w-0"
+        class="group relative min-w-0 flex-1"
         @click="emit('openDeckManagementModal')"
         title="デッキの保存・読み込み"
         :disabled="props.isSaving"
@@ -143,7 +143,7 @@ const onDeckImageError = (e: Event) => {
       >
         <span class="flex items-center justify-center gap-1">
           <svg
-            class="w-3 h-3"
+            class="h-3 w-3"
             fill="white"
             stroke="currentColor"
             viewBox="0 -960 960 960"
@@ -160,14 +160,14 @@ const onDeckImageError = (e: Event) => {
       <BaseButton
         variant="danger"
         size="xs"
-        class="group relative flex-1 min-w-0"
+        class="group relative min-w-0 flex-1"
         @click="resetDeck"
         :disabled="deckCards.length === 0"
         title="デッキをリセット"
       >
         <span class="flex items-center justify-center gap-1">
           <svg
-            class="w-3 h-3"
+            class="h-3 w-3"
             fill="white"
             stroke="currentColor"
             viewBox="0 -960 960 960"
@@ -182,9 +182,9 @@ const onDeckImageError = (e: Event) => {
       </BaseButton>
     </div>
 
-    <div class="text-center mb-1">
+    <div class="mb-1 text-center">
       <div
-        class="inline-flex items-center gap-1 sm:gap-2 px-1 sm:px-2 py-0.5 sm:py-1 bg-slate-800/60 backdrop-blur-sm rounded border border-slate-600/50"
+        class="inline-flex items-center gap-1 rounded border border-slate-600/50 bg-slate-800/60 px-1 py-0.5 backdrop-blur-sm sm:gap-2 sm:px-2 sm:py-1"
       >
         <span class="text-xs font-medium text-slate-300">合計枚数:</span>
         <span
@@ -197,7 +197,7 @@ const onDeckImageError = (e: Event) => {
           >/ {{ GAME_CONSTANTS.MAX_DECK_SIZE }}</span
         >
 
-        <div class="w-12 sm:w-16 bg-slate-700 rounded-full overflow-hidden">
+        <div class="w-12 overflow-hidden rounded-full bg-slate-700 sm:w-16">
           <ProgressBar
             :value="totalDeckCards"
             :max="GAME_CONSTANTS.MAX_DECK_SIZE"
@@ -209,12 +209,12 @@ const onDeckImageError = (e: Event) => {
 
     <div
       id="chosen-deck-grid"
-      class="flex-grow overflow-y-auto grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 md:gap-3 lg:gap-4 p-1 sm:p-2 bg-slate-800/40 backdrop-blur-sm rounded border border-slate-700/50 shadow-xl"
+      class="grid grow grid-cols-3 gap-2 overflow-y-auto rounded border border-slate-700/50 bg-slate-800/40 p-1 shadow-xl backdrop-blur-sm sm:p-2 md:grid-cols-4 md:gap-3 lg:grid-cols-5 lg:gap-4"
     >
       <div
         v-for="item in sortedDeckCards"
         :key="item.card.id"
-        class="group flex flex-col items-center relative h-fit transition-all duration-200"
+        class="group relative flex h-fit flex-col items-center transition-all duration-200"
       >
         <CardTile
           :img-src="getCardImageUrl(item.card.id)"
@@ -226,10 +226,10 @@ const onDeckImageError = (e: Event) => {
         >
           <template #overlay>
             <div
-              class="absolute inset-0 bg-gradient-to-t from-slate-900/50 via-transparent to-transparent pointer-events-none"
+              class="pointer-events-none absolute inset-0 bg-linear-to-t from-slate-900/50 via-transparent to-transparent"
             ></div>
             <div
-              class="absolute bottom-2 w-full px-1 flex items-center justify-center gap-1"
+              class="absolute bottom-2 flex w-full items-center justify-center gap-1 px-1"
             >
               <CountStepper
                 :count="item.count"

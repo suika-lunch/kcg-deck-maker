@@ -11,10 +11,10 @@
 -->
 <template>
   <div
-    class="relative flex items-center bg-slate-700 p-1 rounded-lg select-none overflow-hidden isolate"
+    class="relative isolate flex items-center overflow-hidden rounded-lg bg-slate-700 p-1 select-none"
   >
     <div
-      class="absolute top-0 bottom-0 right-0 left-0 rounded-md bg-blue-600 transition-transform duration-200 ease-out pointer-events-none"
+      class="pointer-events-none absolute top-0 right-0 bottom-0 left-0 rounded-md bg-blue-600 transition-transform duration-200 ease-out"
       :style="{ width: thumbWidth, transform: `translateX(${translateX})` }"
       aria-hidden="true"
     />
@@ -24,7 +24,7 @@
       @click="$emit('update:modelValue', opt.value)"
       :aria-pressed="opt.value === modelValue"
       type="button"
-      class="relative z-10 flex-1 min-w-0 px-3 py-1 text-sm font-medium rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 transition-colors"
+      class="relative z-10 min-w-0 flex-1 rounded-md px-3 py-1 text-sm font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
       :class="[
         opt.value === modelValue
           ? 'text-white'

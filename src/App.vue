@@ -108,11 +108,11 @@ const cardImageModalProps = computed(() => ({
 
 <template>
   <div
-    class="flex flex-col lg:flex-row h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-slate-100 font-sans relative overflow-hidden"
+    class="relative flex h-screen flex-col overflow-hidden bg-linear-to-br from-slate-900 via-slate-800 to-slate-900 font-sans text-slate-100 lg:flex-row"
     @contextmenu.prevent
     @selectstart.prevent
   >
-    <div class="flex flex-col lg:flex-row flex-1 overflow-hidden">
+    <div class="flex flex-1 flex-col overflow-hidden lg:flex-row">
       <DeckSection
         v-bind="deckSectionProps"
         @generate-deck-code="deckCodeStore.generateAndShowDeckCode"
@@ -121,7 +121,7 @@ const cardImageModalProps = computed(() => ({
         @open-deck-management-modal="
           deckManagementStore.openDeckManagementModal
         "
-        class="lg:w-1/2 lg:h-full overflow-y-auto"
+        class="overflow-y-auto lg:h-full lg:w-1/2"
       />
 
       <CardListSection
@@ -131,7 +131,7 @@ const cardImageModalProps = computed(() => ({
         @increment-card="deckStore.incrementCardCount"
         @decrement-card="deckStore.decrementCardCount"
         @open-image-modal="openImageModalFromCardList"
-        class="lg:w-1/2 lg:h-full overflow-y-auto"
+        class="overflow-y-auto lg:h-full lg:w-1/2"
       />
     </div>
 

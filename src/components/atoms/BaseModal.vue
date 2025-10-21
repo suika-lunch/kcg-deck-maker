@@ -14,7 +14,7 @@
 <template>
   <div
     v-if="modelValue"
-    class="fixed inset-0 z-[1000] flex items-center justify-center bg-black/70 p-4"
+    class="fixed inset-0 z-1000 flex items-center justify-center bg-black/70 p-4"
     role="dialog"
     aria-modal="true"
     :aria-labelledby="ariaLabelledby || undefined"
@@ -22,7 +22,7 @@
   >
     <div
       ref="container"
-      class="relative w-full max-w-md max-h-[90vh] overflow-auto rounded-lg bg-slate-800 border border-slate-700 shadow-2xl outline-none"
+      class="relative max-h-[90vh] w-full max-w-md overflow-auto rounded-lg border border-slate-700 bg-slate-800 shadow-2xl outline-none"
       tabindex="-1"
       @keydown.esc.prevent.stop="emitClose"
       @click.stop
@@ -35,7 +35,7 @@
       </section>
       <footer
         v-if="$slots['footer']"
-        class="border-t border-slate-700 p-4 bg-slate-700/50"
+        class="border-t border-slate-700 bg-slate-700/50 p-4"
       >
         <slot name="footer" />
       </footer>
@@ -43,7 +43,7 @@
       <button
         v-if="closable"
         type="button"
-        class="absolute top-3 right-3 text-slate-400 hover:text-slate-100 transition-colors"
+        class="absolute top-3 right-3 text-slate-400 transition-colors hover:text-slate-100"
         aria-label="閉じる"
         @click="emitClose"
       >

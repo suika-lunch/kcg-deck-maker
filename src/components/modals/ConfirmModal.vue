@@ -25,7 +25,7 @@
       <h3 id="confirm-title" class="text-lg font-bold">デッキリセット</h3>
     </template>
 
-    <p class="m-0 text-gray-300 leading-relaxed">{{ message }}</p>
+    <p class="m-0 leading-relaxed text-gray-300">{{ message }}</p>
 
     <template #footer>
       <div class="flex justify-end gap-3 sm:flex-col">

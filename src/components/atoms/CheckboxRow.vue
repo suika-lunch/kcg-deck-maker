@@ -9,13 +9,13 @@
 -->
 <template>
   <label
-    class="flex items-center cursor-pointer hover:bg-gray-700 p-1 rounded transition-colors"
+    class="flex cursor-pointer items-center rounded p-1 transition-colors hover:bg-gray-700"
   >
     <input
       type="checkbox"
       :checked="checked"
       @change="$emit('change')"
-      class="form-checkbox h-4 w-4 text-blue-600 bg-gray-700 border-gray-600 rounded"
+      class="form-checkbox h-4 w-4 rounded border-gray-600 bg-gray-700 text-blue-600"
     />
     <span class="ml-2"><slot /></span>
   </label>

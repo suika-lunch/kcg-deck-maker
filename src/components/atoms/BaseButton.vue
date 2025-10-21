@@ -17,7 +17,7 @@
     :type="type"
     :disabled="disabled || loading"
     :aria-disabled="disabled || loading"
-    class="inline-flex items-center justify-center rounded font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900"
+    class="inline-flex items-center justify-center rounded font-medium transition-all duration-200 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 focus-visible:outline-none"
     :class="[
       variantClass,
       sizeClass,
@@ -25,7 +25,7 @@
     ]"
   >
     <span v-if="loading" class="mr-1 inline-flex">
-      <svg class="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
+      <svg class="h-4 w-4 animate-spin" fill="none" viewBox="0 0 24 24">
         <circle
           class="opacity-25"
           cx="12"

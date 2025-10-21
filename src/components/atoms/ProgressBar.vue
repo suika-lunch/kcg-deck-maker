@@ -11,9 +11,9 @@
   - 副作用: なし（表示専用）
 -->
 <template>
-  <div class="rounded-full overflow-hidden" :style="{ width: props.width }">
+  <div class="overflow-hidden rounded-full" :style="{ width: props.width }">
     <div
-      class="h-full transition-all duration-300 rounded-full"
+      class="h-full rounded-full transition-all duration-300"
       :class="barColor"
       :style="{ width: percent + '%' }"
     ></div>

@@ -94,14 +94,14 @@ const resetFilters = () => {
 <template>
   <div
     v-if="isVisible"
-    class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+    class="bg-opacity-50 fixed inset-0 z-50 flex items-center justify-center bg-black"
     @click.self="emit('close')"
   >
-    <div class="bg-gray-800 p-4 w-full h-full flex flex-col overflow-hidden">
-      <div class="flex justify-between items-center mb-4 flex-shrink-0">
+    <div class="flex h-full w-full flex-col overflow-hidden bg-gray-800 p-4">
+      <div class="mb-4 flex shrink-0 items-center justify-between">
         <div>
           <h3 class="text-lg font-bold">検索・絞り込み</h3>
-          <div class="text-sm text-gray-400 mt-1">
+          <div class="mt-1 text-sm text-gray-400">
             {{ filterStats.filteredCount }} /
             {{ filterStats.totalCount }} 件表示
             <span class="text-blue-400">
@@ -131,9 +131,9 @@ const resetFilters = () => {
         </div>
       </div>
 
-      <div class="flex-shrink-0">
+      <div class="shrink-0">
         <div class="mb-4">
-          <label for="searchText" class="block text-sm font-medium mb-1">
+          <label for="searchText" class="mb-1 block text-sm font-medium">
             テキスト検索 (名前, ID, タグ)
           </label>
           <div class="relative">
@@ -141,16 +141,16 @@ const resetFilters = () => {
               id="searchText"
               type="text"
               v-model="inputText"
-              class="w-full px-3 py-2 pr-10 text-sm sm:text-base rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring focus:border-blue-500"
+              class="w-full rounded border border-gray-600 bg-gray-700 px-3 py-2 pr-10 text-sm focus:border-blue-500 focus:ring focus:outline-none sm:text-base"
               placeholder="カード名、ID、タグを入力"
             />
             <button
               v-if="inputText"
               @click="inputText = ''"
-              class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white"
+              class="absolute top-1/2 right-2 -translate-y-1/2 transform text-gray-400 hover:text-white"
             >
               <svg
-                class="w-4 h-4"
+                class="h-4 w-4"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -166,7 +166,7 @@ const resetFilters = () => {
           </div>
         </div>
 
-        <div class="flex flex-wrap gap-4 mb-4">
+        <div class="mb-4 flex flex-wrap gap-4">
           <CheckboxRow
             :checked="filterCriteria.onlyFavorites"
             @change="filterStore.toggleOnlyFavoritesFilter()"
@@ -183,17 +183,17 @@ const resetFilters = () => {
       </div>
 
       <div class="mb-4">
-        <label class="block text-sm font-medium mb-2">
+        <label class="mb-2 block text-sm font-medium">
           収録弾で絞り込み
           <span
             v-if="filterCriteria.idInitials.length > 0"
-            class="text-blue-400 ml-1"
+            class="ml-1 text-blue-400"
           >
             ({{ filterCriteria.idInitials.length }} 選択中)
           </span>
         </label>
         <div
-          class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-10 xl:grid-cols-12 text-sm"
+          class="grid grid-cols-3 text-sm sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-10 xl:grid-cols-12"
         >
           <CheckboxRow
             v-for="ch in allIdInitials"
@@ -207,11 +207,11 @@ const resetFilters = () => {
       </div>
 
       <div class="mb-4">
-        <label class="block text-sm font-medium mb-2">
+        <label class="mb-2 block text-sm font-medium">
           種類で絞り込み
           <span
             v-if="filterCriteria.kind.length > 0"
-            class="text-blue-400 ml-1"
+            class="ml-1 text-blue-400"
           >
             ({{ filterCriteria.kind.length }} 選択中)
           </span>
@@ -229,16 +229,16 @@ const resetFilters = () => {
       </div>
 
       <div class="mb-4">
-        <label class="block text-sm font-medium mb-2">
+        <label class="mb-2 block text-sm font-medium">
           タイプで絞り込み
           <span
             v-if="filterCriteria.type.length > 0"
-            class="text-blue-400 ml-1"
+            class="ml-1 text-blue-400"
           >
             ({{ filterCriteria.type.length }} 選択中)
           </span>
         </label>
-        <div class="grid grid-cols-5 md:grid-cols-9 text-sm">
+        <div class="grid grid-cols-5 text-sm md:grid-cols-9">
           <CheckboxRow
             v-for="type in allTypes"
             :key="type"
@@ -250,15 +250,15 @@ const resetFilters = () => {
         </div>
       </div>
 
-      <div class="min-h-0 flex-1 flex flex-col">
+      <div class="flex min-h-0 flex-1 flex-col">
         <div
-          class="flex items-center justify-between mb-2 flex-shrink-0 flex-wrap gap-2"
+          class="mb-2 flex shrink-0 flex-wrap items-center justify-between gap-2"
         >
           <label class="block text-sm font-medium">
             タグで絞り込み
             <span
               v-if="filterCriteria.tags.length > 0"
-              class="text-blue-400 ml-1"
+              class="ml-1 text-blue-400"
             >
               ({{ filterCriteria.tags.length }} 選択中)
             </span>
@@ -272,7 +272,7 @@ const resetFilters = () => {
           />
         </div>
         <div
-          class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 text-sm overflow-y-auto pr-2 flex-1"
+          class="grid flex-1 grid-cols-2 overflow-y-auto pr-2 text-sm sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5"
         >
           <CheckboxRow
             v-for="tag in allTags"
