@@ -27,8 +27,23 @@
       @keydown.esc.prevent.stop="emitClose"
       @click.stop
     >
-      <header v-if="$slots['header']" class="border-b border-slate-700 p-4">
-        <slot name="header" />
+      <header
+        v-if="$slots['header'] || closable"
+        class="border-b border-slate-700 p-4"
+      >
+        <div class="flex items-center justify-between gap-4">
+          <div class="min-w-0">
+            <slot name="header" />
+          </div>
+          <BaseButton
+            v-if="closable"
+            variant="ghost"
+            size="sm"
+            @click="emitClose"
+          >
+            閉じる
+          </BaseButton>
+        </div>
       </header>
       <section class="p-4">
         <slot />
@@ -39,22 +54,13 @@
       >
         <slot name="footer" />
       </footer>
-
-      <button
-        v-if="closable"
-        type="button"
-        class="absolute top-3 right-3 text-slate-400 transition-colors hover:text-slate-100"
-        aria-label="閉じる"
-        @click="emitClose"
-      >
-        ×
-      </button>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, watch, nextTick, onUnmounted } from "vue";
+import BaseButton from "./BaseButton.vue";
 
 interface Props {
   modelValue: boolean;
