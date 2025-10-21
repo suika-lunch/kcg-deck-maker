@@ -122,6 +122,7 @@ const closeModal = () => {
         <textarea
           :value="currentDeckCode || ''"
           readonly
+          @contextmenu.stop
           class="h-24 w-full resize-none rounded border border-gray-600 bg-gray-700 px-3 py-2 text-sm text-slate-200 placeholder-slate-400"
         ></textarea>
       </div>
